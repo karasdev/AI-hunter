@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+import { auth } from "@/auth";
 import { scoreAndRank } from "@/lib/ai/match";
 import { aggregateJobs } from "@/lib/jobs/aggregate";
 import { buildGoogleLinkedInJobsUrl, buildLinkedInJobsUrl } from "@/lib/jobs/linkedin-link";
@@ -17,6 +19,11 @@ function formGet(form: FormData, key: string) {
 }
 
 export async function POST(req: Request) {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const errors: string[] = [];
   try {
     const contentType = req.headers.get("content-type") || "";

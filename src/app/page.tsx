@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { useId, useState } from "react";
 
+import { UserMenu } from "@/components/user-menu";
+
 type Scored = {
   id: string;
   sourceLabel: string;
@@ -75,11 +77,14 @@ export default function Home() {
     <div className="min-h-full bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <header className="mb-10">
-          <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
-            <Sparkles className="h-6 w-6" aria-hidden />
-            <span className="text-sm font-semibold uppercase tracking-wide">
-              AI Hunter
-            </span>
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+              <Sparkles className="h-6 w-6" aria-hidden />
+              <span className="text-sm font-semibold uppercase tracking-wide">
+                AI Hunter
+              </span>
+            </div>
+            <UserMenu />
           </div>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
             Match your resume to real jobs
